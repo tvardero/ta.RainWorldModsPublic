@@ -9,8 +9,13 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <AnalysisMode>Recommended</AnalysisMode>
     <ImplicitUsings>enable</ImplicitUsings>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>en</NeutralLanguage>
+<!--    <GenerateDocumentationFile>true</GenerateDocumentationFile>-->
   </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="tvardero.MenuTests"/>
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="BepInEx">
@@ -49,6 +54,14 @@
       <Private>false</Private>
       <HintPath>..\..\thirdparty\ImGui.NET.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="PolySharp" Version="1.15.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

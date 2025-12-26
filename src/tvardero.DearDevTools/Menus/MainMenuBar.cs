@@ -1,4 +1,5 @@
 ﻿using tvardero.DearDevTools.Components;
+using tvardero.DearDevTools.Services;
 using UnityEngine;
 using UnityEngine.Diagnostics;
 
@@ -6,6 +7,13 @@ namespace tvardero.DearDevTools.Menus;
 
 public class MainMenuBar : ImGuiDrawableBase
 {
+    private readonly MenuManager _menuManager;
+
+    public MainMenuBar(MenuManager menuManager)
+    {
+        _menuManager = menuManager;
+    }
+
     /// <inheritdoc />
     public override bool IsVisible => true;
 
@@ -13,52 +21,46 @@ public class MainMenuBar : ImGuiDrawableBase
     public override bool IsBlockingWMEvent => false;
 
     /// <inheritdoc />
-    public override bool RequiresMainUiShown => true;
+    public override bool RequiresMainUiVisible => true;
 
     /// <inheritdoc />
-    public override void Draw()
+    protected internal override void Draw()
     {
         if (ImGui.BeginMainMenuBar())
         {
             if (ImGui.BeginMenu("Menu"))
             {
                 MenuMenu();
-
                 ImGui.EndMenu();
             }
 
             if (ImGui.BeginMenu("Edit"))
             {
                 MenuEdit();
-
                 ImGui.EndMenu();
             }
 
             if (ImGui.BeginMenu("View"))
             {
                 MenuView();
-
                 ImGui.EndMenu();
             }
 
             if (ImGui.BeginMenu("Navigate"))
             {
                 MenuNavigate();
-
                 ImGui.EndMenu();
             }
 
             if (ImGui.BeginMenu("Tools"))
             {
                 MenuTools();
-
                 ImGui.EndMenu();
             }
 
             if (ImGui.BeginMenu("Help"))
             {
                 MenuHelp();
-
                 ImGui.EndMenu();
             }
 

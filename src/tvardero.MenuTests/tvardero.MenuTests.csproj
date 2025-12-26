@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ImGui.NET" Version="[1.91.0.1]"/>
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="Silk.NET.Input" Version="2.22.0"/>
+    <PackageReference Include="Silk.NET.OpenGL.Extensions.ImGui" Version="2.22.0"/>
+    <PackageReference Include="Silk.NET.Windowing" Version="2.22.0"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\tvardero.DearDevTools\tvardero.DearDevTools.csproj"/>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="BepInEx">
+      <HintPath>..\..\thirdparty\BepInEx.dll</HintPath>
+    </Reference>
+<!--    <Reference Include="System.Numerics">-->
+<!--      <HintPath>..\..\thirdparty\System.Numerics.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="UnityEngine">-->
+<!--      <HintPath>..\..\thirdparty\UnityEngine.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="UnityEngine.CoreModule">-->
+<!--      <HintPath>..\..\thirdparty\UnityEngine.CoreModule.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="UnityEngine.InputLegacyModule">-->
+<!--      <HintPath>..\..\thirdparty\UnityEngine.InputLegacyModule.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="Assembly-CSharp">-->
+<!--      <HintPath>..\..\thirdparty\PUBLIC-Assembly-CSharp.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="HOOKS-Assembly-CSharp">-->
+<!--      <HintPath>..\..\thirdparty\HOOKS-Assembly-CSharp.dll</HintPath>-->
+<!--    </Reference>-->
+    <Reference Include="rain-world-imgui-api">
+      <HintPath>..\..\thirdparty\rain-world-imgui-api.dll</HintPath>
+    </Reference>
+<!--    <Reference Include="ImGui.NET">-->
+<!--      <HintPath>..\..\thirdparty\ImGui.NET.dll</HintPath>-->
+<!--    </Reference>-->
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="FiraCode-Light.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+
+</Project>

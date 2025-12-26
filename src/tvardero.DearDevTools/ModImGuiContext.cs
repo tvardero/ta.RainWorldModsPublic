@@ -5,10 +5,10 @@ namespace tvardero.DearDevTools;
 
 internal sealed class ModImGuiContext : IMGUIContext, IDisposable
 {
-    private readonly DearDevToolsPlugin _plugin;
+    private readonly IDearDevToolsPlugin _plugin;
     private bool _disposed;
 
-    public ModImGuiContext(DearDevToolsPlugin plugin)
+    public ModImGuiContext(IDearDevToolsPlugin plugin)
     {
         _plugin = plugin;
     }
@@ -28,9 +28,10 @@ internal sealed class ModImGuiContext : IMGUIContext, IDisposable
         if (_disposed) return false;
         if (!_plugin.AreDearDevToolsActive) return false;
 
+        bool isMainUiVisible = _plugin.IsMainUiVisible;
         return RenderList
             .Where(drawable => drawable.IsVisible)
-            .Where(drawable => !drawable.RequiresMainUiShown || _plugin.IsMainUiVisible)
+            .Where(drawable => isMainUiVisible || !drawable.RequiresMainUiVisible)
             .Any(drawable => drawable.IsBlockingWMEvent);
     }
 
@@ -42,7 +43,7 @@ internal sealed class ModImGuiContext : IMGUIContext, IDisposable
     /// <inheritdoc />
     public void Dispose()
     {
-        if (IsActive) Deactivate();
+        Deactivate();
 
         _disposed = true;
         RenderList.Clear();
@@ -54,9 +55,10 @@ internal sealed class ModImGuiContext : IMGUIContext, IDisposable
         if (_disposed) return;
         if (!_plugin.AreDearDevToolsActive) return;
 
+        bool isMainUiVisible = _plugin.IsMainUiVisible;
         IEnumerable<ImGuiDrawableBase> toDraw = RenderList
             .Where(drawable => drawable.IsVisible)
-            .Where(drawable => !drawable.RequiresMainUiShown || _plugin.IsMainUiVisible);
+            .Where(drawable => isMainUiVisible || !drawable.RequiresMainUiVisible);
 
         foreach (ImGuiDrawableBase drawable in toDraw) { drawable.Draw(); }
     }

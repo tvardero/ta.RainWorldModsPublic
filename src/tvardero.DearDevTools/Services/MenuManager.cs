@@ -1,31 +1,39 @@
-﻿using tvardero.DearDevTools.Components;
+﻿using Microsoft.Extensions.DependencyInjection;
+using tvardero.DearDevTools.Components;
 
 namespace tvardero.DearDevTools.Services;
 
 public class MenuManager
 {
-    public IReadOnlyList<ImGuiDrawableBase> CurrentlyDrawn { get; } = new List<ImGuiDrawableBase>().AsReadOnly();
+    private readonly ModImGuiContext _modImGuiContext;
+    private readonly IServiceProvider _serviceProvider;
 
-    public TMenu OpenMenu<TMenu>()
-    where TMenu : ImGuiDrawableBase
+    public MenuManager(IServiceProvider serviceProvider)
     {
-        throw new NotImplementedException();
+        _serviceProvider = serviceProvider;
+        _modImGuiContext = serviceProvider.GetRequiredService<ModImGuiContext>();
     }
 
-    public void CloseMenu<TMenu>(TMenu menu)
-    where TMenu : ImGuiDrawableBase
+    public TDrawable CreateMenu<TDrawable>(bool? isVisible = null)
+    where TDrawable : ImGuiDrawableBase
     {
-        throw new NotImplementedException();
+        var menu = ActivatorUtilities.GetServiceOrCreateInstance<TDrawable>(_serviceProvider);
+        if (isVisible.HasValue) menu.IsVisible = isVisible.Value;
+
+        if (!_modImGuiContext.RenderList.Contains(menu)) _modImGuiContext.RenderList.Add(menu);
+
+        return menu;
     }
 
-    public void HideMenu<TMenu>(TMenu menu)
-    where TMenu : ImGuiDrawableBase
+    public IEnumerable<TDrawable> GetExistingMenus<TDrawable>()
+    where TDrawable : ImGuiDrawableBase
     {
-        throw new NotImplementedException();
+        return _modImGuiContext.RenderList.OfType<TDrawable>();
     }
 
-    public void ShowMenu<TMenu>(TMenu menu, bool show = true)
+    public TDrawable? GetFirstExistingMenu<TDrawable>()
+    where TDrawable : ImGuiDrawableBase
     {
-        throw new NotImplementedException();
+        return _modImGuiContext.RenderList.OfType<TDrawable>().FirstOrDefault();
     }
 }

@@ -16,7 +16,7 @@ public abstract class SimpleImGuiWindowBase : ImGuiDrawableBase
     public abstract string Name { get; }
 
     /// <inheritdoc />
-    public sealed override void Draw()
+    protected internal sealed override void Draw()
     {
         ImGui.SetNextWindowSize(new Vector2(600, 400), ImGuiCond.FirstUseEver);
         ImGui.Begin(Name, ref _isVisible);
