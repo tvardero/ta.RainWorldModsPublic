@@ -38,7 +38,7 @@ Steps:
 
 ## FAQ:
 
-> I'm playing on macOs / Linux and not a single mod loaded and no mods work!
+> I'm playing on macOS / Linux and not a single mod loaded and no mods work!
 
 Proton configures Rain World to run perfect, however misses one configuration to support modding.
 Rain World uses BepInEx library to load mods, and BepInEx requires `winhttp` library to be loaded.
@@ -49,6 +49,11 @@ For ease of modifying wineconfig, I recommend installing `protontricks` (with de
 After adding `winhttp` library, be sure to **UNLOAD ALL** mods in Remix menu, restart, and then load them back again.
 
 ---
+
+> I'm playing on macOS / Linux and have a black immovable screen in front / behind the game.
+
+Ensure you are running the game with Proton version 9.0, not Experimental, not Hotfix. Changing Proton version might
+reset your wineconfig, re-add `winhttp` library if needed (see previous question).
 
 ## License
 
